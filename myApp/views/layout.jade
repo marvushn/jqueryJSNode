@@ -1,0 +1,320 @@
+doctype strict
+//html(xmlns='http://www.w3.org/1999/xhtml')
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    meta(http-equiv="Content-Language" content="English")
+    meta(name="Description" content="Internet Jobs")
+    link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+    link(rel="stylesheet" type="text/css" href="/stylesheets/StylesForScrolling.css")
+    //JavaScript libraries
+    link(rel='stylesheet' href='/stylesheets/jquery-ui.min.css')
+    script(src='/javascripts/index.js')
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/jquery-ui.min.js')
+    script(src='/javascripts/FunctionsAndLibraries.js')
+    script(src='/javascripts/customJSFunctions.js')
+    script(src='/javascripts/custom.jquery.slider.pagination.js')
+    script(src="/javascripts/script.js")
+    //title Internet News
+    title= title
+    //script.
+  body
+    #header
+      #logo
+        p.slogan
+          b Connecting Online people
+          br
+          | Sharing IT trends
+        | &#x9;&#x9;&#x9;
+        div(style='float: left;')
+          h1
+            a(href='#') Internet News
+      | &#x9;&#x9;&#x9;
+      #hmenu
+        a(href='#') Home
+        a(href='#') Browse News
+        a(href='#') Submit News
+      // 1
+      //
+        <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>
+      //
+        <div id="login-register-confirm" title="Login or Register">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please, Login in system or Register</p>
+        </div>
+      #hlogin
+        p#greetLink
+          | Hi,  You can
+          a.iframe_popup(href='/templates/login/login-register-overlay.html', title='Login/Register') Login
+        | &#x9;&#x9;&#x9;&#x9;
+        p
+          | Hello, you can
+          a#popup(href='#') Register or Login here
+        | &#x9;&#x9;&#x9;&#x9;
+        #ihateiframes
+          p this will be replaced
+        // <div id="dialoggg"></div>
+        //
+          templates\login\greet-register-inlay.          templates\login\login-register-overlay.html
+          onclick="window.open(this.href, 'dialog', 'width=500,height=300'); return false;"
+          login-register-overlay.html
+    | &#x9;
+    .content
+      #articles
+        #left
+          table
+            tbody
+              // <div id="newsbox">
+              h1 New posts
+              // we need to implement some logic structure for custom pagination
+              tr
+                #newsitem.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    span#author
+                      | Posted by:
+                      i John Doe
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/more.gif', alt='')
+
+                      a(href='#') Read more
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/comment.gif', alt='')
+
+                      a(href='#') Comments(7)
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/timeicon.gif', alt='')
+                      |  10th Jan, 2006
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              tr
+                #newsitem2.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum2
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    img(src='images/more.gif', alt='')
+
+                    a(href='#') Read more
+
+                    img(src='images/comment.gif', alt='')
+
+                    a(href='#') Comments(12)
+
+                    img(src='images/timeicon.gif', alt='')
+                    |  29th Dec, 2005
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              tr
+                #newsitem3.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum3
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    img(src='images/more.gif', alt='')
+
+                    a(href='#') Read more
+
+                    img(src='images/comment.gif', alt='')
+
+                    a(href='#') Comments(34)
+
+                    img(src='images/timeicon.gif', alt='')
+                    |  24th Dec, 2005
+              // f
+              tr
+                #newsite4.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum4
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    span#author
+                      | Posted by:
+                      i John Doe
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/more.gif', alt='')
+
+                      a(href='#') Read more
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/comment.gif', alt='')
+
+                      a(href='#') Comments(7)
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    span
+                      img(src='images/timeicon.gif', alt='')
+                      |  10th Jan, 2006
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              tr
+                #newsitem5.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum5
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    img(src='images/more.gif', alt='')
+
+                    a(href='#') Read more
+
+                    img(src='images/comment.gif', alt='')
+
+                    a(href='#') Comments(12)
+
+                    img(src='images/timeicon.gif', alt='')
+                    |  29th Dec, 2005
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              tr
+                #newsitem6.listofnews
+                  h2
+                    a(href='#') Lorem Ipsum6
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p
+                    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupt...
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.date
+                    img(src='images/more.gif', alt='')
+
+                    a(href='#') Read more
+
+                    img(src='images/comment.gif', alt='')
+
+                    a(href='#') Comments(34)
+
+                    img(src='images/timeicon.gif', alt='')
+                    |  24th Dec, 2005
+              // </div>
+          //
+            <div id="pagination">
+            <div id="prev">
+            <button>Prev</button>
+            </div>
+            <div id="pagenum">
+            <span class="pagination-info">Page 1</span>
+            </div>
+            <div id="pagenum2">
+            <span class="pagination-info">Page 2</span>
+            </div>
+            <div id="pagenum3">
+            <span class="pagination-info">Page 3</span>
+            </div>
+            <div id="next">
+            <button>Next</button>
+            </div>
+            </div>
+          .pagination-page
+
+          span.pagination-info
+        | &#x9;&#x9;
+        #right
+          #searchform
+            form.search(method='post', action='/post-form.php')
+              p
+                input#pojam.text(name='pojam', type='text')
+                | &#x9;&#x9;&#x9;&#x9;
+                input.button(name='search', value='Search', type='submit')
+          | &#x9;&#x9;
+          #rightmenu
+            #navaccordion
+              h3 Categories
+              | &#x9;&#x9;&#x9;&#x9;
+              div
+                p
+                  | Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+              | &#x9;&#x9;&#x9;&#x9;
+              h3 Advertisement
+              | &#x9;&#x9;&#x9;&#x9;
+              div
+                p
+                  | Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.
+              | &#x9;&#x9;&#x9;&#x9;
+              h3 Activities
+              | &#x9;&#x9;&#x9;&#x9;
+              div
+                p
+                  | Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                | &#x9;&#x9;&#x9;&#x9;
+                ul
+                  li List item one
+                  | &#x9;&#x9;&#x9;&#x9;
+                  li List item two
+                  | &#x9;&#x9;&#x9;&#x9;
+                  li List item three
+              | &#x9;&#x9;&#x9;&#x9;
+              h3 Statistics
+              | &#x9;&#x9;&#x9;&#x9;
+              div
+                p
+                  | Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.
+                p
+                  | Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+          | &#x9;&#x9;
+          .rightarticle
+            p
+              | Lorem ipsum dolor sit amet,
+              a(href='#') consectetuer adipiscing elit
+              | , sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              a(href='#') quis nostrud exerci
+              | .
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          | &#x9;&#x9;&#x9;
+          | &#x9;&#x9;&#x9;
+          | &#x9;&#x9;
+          .rightarticle_ad
+            a(href='#') Featured Posts
+          | &#x9;&#x9;
+          .rightarticle_ad
+            a(href='#') Top 10 News
+      | &#x9;
+      #links
+        p
+    // instance JSONP for new quotes
+    #additional
+      p
+        b Lovely Quote:
+        span#loveluquot
+          | There may be no &apos;I&apos; in team, but there&apos;s a &apos;ME&apos; if you look hard enough. - David Brent
+    | &#x9;
+    #whiteline
+    | &#x9;
+    #footer
+      p(style='float: left;')
+        a(href='#') Archive
+        img(src='images/separator.gif', alt='')
+        a(href='#') RSS Feed
+        | &#x9;&#x9;
+        br
+        a(href='#') CSS
+        |  and
+        a(href='#') XHTML
+        img(src='images/separator.gif', alt='')
+        a(href='#') Accessibility
+      | &#x9;
+      p(style='float: right; text-align: right;')
+        a(href='#') Contact Us
+        br
+        | &#x9;&#x9;&copy; 2011,
+        a(href='#', title='Internet Jobs') Internet Jobs
+  | &#x9;
+  #dialog-confirm(title='Login or Register')
+    p
+      span.ui-icon.ui-icon-alert(style='float:left; margin:0 7px 20px 0;')
+      | Please, enter the system

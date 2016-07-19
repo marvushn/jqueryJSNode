@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>Loading a page into a dialog</title>
+
+<style type="text/css">
+    #tire-specs {
+        border-collapse: collapse;
+    }
+    #tire-specs th,
+    #tire-specs td {
+        padding: 2px 5px;
+        border: 1px solid #000;
+    }
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="English" />
+<meta name="Description" content="Internet Jobs" />
+
+<link rel="stylesheet" type="text/css" href="images/style.css" />
+<link rel="stylesheet" type="text/css" href="images/StylesForScrolling.css" />
+<!--JavaScript libraries-->
+<link rel="stylesheet" href="vendors/jquery-ui.min.css">
+<script src="vendors/jquery.js"></script>
+<script src="vendors/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#popup').each(function() {
+            var $link = $(this);
+            var $dialog = $('<div></div>')
+                    .load($link.attr('href') + ' #content')
+                    .dialog({
+                        autoOpen: false,
+                        title: $link.attr('title'),
+                        width: 600
+                    });
+
+            $link.click(function() {
+                $dialog.dialog('open');
+
+                return false;
+            });
+        });
+    });
+</script>
+</head>
+<body>
+
+<p>This is an example from the Nemikor Blog article <a href="http://blog.nemikor.com/2009/04/18/loading-a-page-into-a-dialog/">Loading a page into a dialog</a>.</p>
+
+<h2>Michelin Primacy MXV4</h2>
+
+<table id="tire-specs">
+    <thead>
+    <tr>
+        <th>Size</th>
+        <th><a id="popup" href="login-register-overlay.html" onclick="window.open(this.href, 'popupwindow', 'width=500,height=300'); return false;">Register or Login here</a></th>
+        <th>Max Load</th>
+        <th>Max Inflation Pressure</th>
+        <th>Tread Depth</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>205/65R15</td>
+        <td>620 A A</td>
+        <td>1477 lbs.</td>
+        <td>44 psi</td>
+        <td>11/32"</td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

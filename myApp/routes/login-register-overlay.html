@@ -1,0 +1,97 @@
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="English" />
+<meta name="Description" content="Internet Jobs" />-->
+
+<link rel="stylesheet" type="text/css" href="images/style.css" />
+<link rel="stylesheet" type="text/css" href="images/StylesForScrolling.css" />
+<!--JavaScript libraries-->
+<link rel="stylesheet" href="vendors/jquery-ui.min.css">
+<script src="vendors/jquery.js"></script>
+<script src="vendors/jquery-ui.min.js"></script>
+<script src="js/FunctionsAndLibraries.js"></script>
+<script src="js/customJSFunctions.js"></script>
+<script>
+	/*$(function() {
+	 $( "#login-box" ).dialog({
+	 resizable: true,
+	 autoOpen: false,
+	 height:140,
+	 modal: true,
+	 buttons: {
+	 "login": function() {
+	 $( this ).dialog( "close" );
+	 },
+	 "register": function() {
+	 $( this ).dialog( "close" );
+	 },
+	 Cancel: function() {
+	 $( this ).dialog( "close" );
+	 }
+	 }
+	 });
+	 });*/
+	$(document).ready(function(){
+		$("#logb").click(function(){
+			$( window ).unload(function() {
+				return "Bye now!";
+			});
+			//$("#greetLink").html("<p>Hello!</p>");
+			//$("#greetLink").replaceWith("<h2>Welcome user!</h2>");
+			//change title
+			//$("#login").replaceWith("<h2>Welcome user!</h2>");
+
+			//$("#greetLink").change(function() {
+			//replaceWith("<h2>Welcome user!</h2>");
+			//$(this).dialog('close');
+			//$(this).window.close();
+			//return false;
+		});
+
+		$("#regb").click(function(){
+			$.get("index.html", function( my_var ) {
+				var title =  $(my_var).filter('greetLink').text();
+				//title contains the title of index2.html
+			});
+			//$("#externalSite").remove();
+
+
+			//$("#register").text("dfdfdf");
+
+		});
+
+	});
+	/*function greetFunc() {
+	 document.getElementById("testsss").innerHTML = "Hello !" ;
+	 }*/
+	$('#logb').on('click',function(){
+		if($('#mainLoginHead').css('display')!='none'){
+			$('#secondLoginHead').html('Out').show().siblings('h3').hide();
+		}else if($('#secondLoginHead').css('display')!='none'){
+			$('#mainLoginHead').show().siblings('h3').hide();
+		}
+	});
+</script>
+<div id="login-box">
+		<div id="login">
+		    <h3 id="mainLoginHead">Sign in here</h3>
+			<!--<h3 id="secondLoginHead" style="display: none;">Log out!</h3>-->
+		    <label for="flogin">Login</label>
+		    <input type="text" name="flogin," id="flogin" value="" maxlength="30" />
+		    <br />
+		    <label for="fpass">Password</label>
+		    <input type="password," id="fpass," name="fpass" value="" />
+		    <label for="logbutton"> </label>
+		    <button id="logb" name="logbutton">Login</button>
+		</div>
+		<div id="register">
+		    <h3>Register now</h3>
+		    <label for="femail">Email</label>
+		    <input type="text," value="" id=femail, name="femail" />
+		    <br />
+		    <label for="floginnew">Login</label>
+		    <input type="text," id="floginnew," name="floginnew," value="" />
+		    <label for="regbutton"> </label>
+		    <button id="regb" name="regbutton">Register</button>
+		</div>
+	</div>
+	
