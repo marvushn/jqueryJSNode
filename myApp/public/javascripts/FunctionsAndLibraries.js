@@ -549,6 +549,86 @@ $(document).ready(function(){              // по окончанию загру
 	})
 });
 
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+//test JSON
+/*$(document).ready(function(){              // по окончанию загрузки страницы
+	$('#testJSON').click(function(){      // вешаем на клик по элементу с id = example-1
+		//$(this).load('/templates/login/login-register-overlay.html'); // загрузку HTML кода из файла example.html
+		$(this)
+			.dialog({
+				closeOnEscape: false,
+				title: "Login or Register",
+				autoOpen: true,
+				height: "auto",
+				width: 350,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				},
+				zIndex: 500
+			})
+			.$.parseJSON('/mocks/navigation.json');
+	})
+});*/
+
+/*$.getJSON( "/mocks/navigation.json", function( data ) {
+	var items = [];
+	$.each( data, function( key, val ) {
+		items.push( "<li id='" + key + "'>" + val + "</li>" );
+	});
+
+	$( "<ul/>", {
+		"class": "my-new-list",
+		html: items.join( "" )
+	}).appendTo( "#testJSON" );
+});*/
+
+$(function(){
+	$('#search').on('keyup', function(e){
+		if(e.keyCode === 13) {
+			var parameters = { search: $(this).val() };
+			$.get( '/lava',parameters, function(data) {
+				$('#results').html(data);
+			});
+		};
+	});
+});
+
+
+
+(document).ready(function(){
+	$("#search").click(function(){
+		$.getJSON("/lava", function(data){
+			$.each(data, function () {
+				$.each(this, function (name, value) {
+						$("div").append(name + '=' + value);
+				});
+			});
+		});
+	});
+});
+
+
+//show only title
+/*if(name==="title") {
+ $("div").append(name + '=' + value);
+ }
+ else {
+ $("div").append(0);
+ }*/
+//console.log(name + '=' + value);
+
+//$(function() {
+//	$( "#newsitem7" ).jquery.parseJSON('/mocks/navigation.json');
+//alert( obj.name === "John" );
+//});
+//var obj = jQuery.parseJSON( '{ "name": "John" }' );
+//	alert( obj.name === "John" );
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 /*$(function () {
 	$('#popup').on('click', function (e) {
 		e.preventDefault();
@@ -822,6 +902,14 @@ $(function() {
 		heightStyle: "content"
 	});
 });
+//---------------------------------------------------------------------------------------------------------------
+//testing read of JQuery
+//$(function() {
+//	$( "#newsitem7" ).jquery.parseJSON('/mocks/navigation.json');
+	//alert( obj.name === "John" );
+//});
+//var obj = jQuery.parseJSON( '{ "name": "John" }' );
+//	alert( obj.name === "John" );
 //---------------------------------------------------------------------------------------------------------------
 //function login or register
 //---------------------------------------------------------------------------------------------------------------
