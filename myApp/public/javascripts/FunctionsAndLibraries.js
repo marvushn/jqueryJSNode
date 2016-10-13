@@ -586,7 +586,7 @@ $(document).ready(function(){              // по окончанию загру
 	}).appendTo( "#testJSON" );
 });*/
 
-$(function(){
+/*$(function(){
 	$('#search').on('keyup', function(e){
 		if(e.keyCode === 13) {
 			var parameters = { search: $(this).val() };
@@ -595,18 +595,55 @@ $(function(){
 			});
 		};
 	});
-});
+});*/
 
+var Listobj = new Array();
 
-
-(document).ready(function(){
+$(document).ready(function(){
 	$("#search").click(function(){
 		$.getJSON("/lava", function(data){
-			$.each(data, function () {
-				$.each(this, function (name, value) {
-						$("div").append(name + '=' + value);
+			//now we have the source
+			$.each(data, function (key,value) {
+				$.each(value,function(parentkey,parentvalue) {
+					if (parentkey != "subitems") {
+						//add elements to our page
+						alert(parentkey +' - '+ parentvalue);
+						var currentDIV = "<div "+parentkey+"="+'"'+parentvalue+'"'+" >";
+						//check if we add first div element
+						if (isEmpty(lastDIV) ) {
+							var lastDIV = parentvalue;
+							$(".newsitems6").append("<div "+parentkey+"="+'"'+currentDIV+'"');
+							//add second element
+						}
+						else {
+							alert(lastDIV);
+							$("."+lastDIV).append("<div "+parentkey+"="+'"'+currentDIV+'"');
+							//add second element
+						};
+
+					};
+					//check if the element is the array
+					if ($.isArray(parentvalue)) {
+						$.each(parentvalue,function(childkey,childvalue) {
+							$.each(childvalue,function(subchildkey,subchildvalue) {
+								if (subchildkey == "description") {
+									alert(subchildkey + ' - ' + subchildvalue);
+								}
+							});
+						});
+					}
 				});
+
+
+				/*$.each(value.subitems,function(indexx,value) {
+					$("div").append(indexx + '=' + value);
+				});*/
+						/*$.each(this, function (name, value) {
+						$("div").append(name + '=' + value);
+				});*/
+					//$("div").append(Listobj);
 			});
+			//
 		});
 	});
 });
