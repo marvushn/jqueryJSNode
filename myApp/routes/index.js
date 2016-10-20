@@ -5,6 +5,8 @@ var fs = require('fs');
 
 ///nodeJS/jqueryJSNode/myApp
 
+//navigationTemplate
+
 function readJSONFile(filename, callback) {
   fs.readFile(filename, function (err, data) {
     if(err) {

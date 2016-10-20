@@ -115,7 +115,7 @@ different functions and libraries for main project and sub-html files
 			var o = $.extend({
 				items: 1,
 				itemsOnPage: 1,
-				pages: 0,
+				pages: 0,s
 				displayedPages: 5,
 				edges: 2,
 				currentPage: 0,
@@ -551,381 +551,79 @@ $(document).ready(function(){              // по окончанию загру
 
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-//test JSON
-/*$(document).ready(function(){              // по окончанию загрузки страницы
-	$('#testJSON').click(function(){      // вешаем на клик по элементу с id = example-1
-		//$(this).load('/templates/login/login-register-overlay.html'); // загрузку HTML кода из файла example.html
-		$(this)
-			.dialog({
-				closeOnEscape: false,
-				title: "Login or Register",
-				autoOpen: true,
-				height: "auto",
-				width: 350,
-				modal: true,
-				buttons: {
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				},
-				zIndex: 500
-			})
-			.$.parseJSON('/mocks/navigation.json');
-	})
+//==========Function parseJSON() begins...==========================================================================
+
+//main function
+
+/*$(function() {
+	var ress = parseJSON();
+	$("#left").append(ress);
 });*/
 
-/*$.getJSON( "/mocks/navigation.json", function( data ) {
-	var items = [];
-	$.each( data, function( key, val ) {
-		items.push( "<li id='" + key + "'>" + val + "</li>" );
-	});
+//named function
 
-	$( "<ul/>", {
-		"class": "my-new-list",
-		html: items.join( "" )
-	}).appendTo( "#testJSON" );
-});*/
+//(function ($) {
+//	function parseJSON() {
+$(function () {
+	//function() {
+		//all variables
+		var currentDIV = null;
+		var currentH2;
+		var currentP;
 
-/*$(function(){
-	$('#search').on('keyup', function(e){
-		if(e.keyCode === 13) {
-			var parameters = { search: $(this).val() };
-			$.get( '/lava',parameters, function(data) {
-				$('#results').html(data);
-			});
-		};
-	});
-});*/
+	$("#left").append(
+		$.getJSON("/lava", function (data) {
 
-var Listobj = new Array();
-
-$(document).ready(function(){
-	$("#search").click(function(){
-		$.getJSON("/lava", function(data){
 			//now we have the source
-			$.each(data, function (key,value) {
-				$.each(value,function(parentkey,parentvalue) {
+			$.each(data, function (key, value) {
+				$.each(value, function (parentkey, parentvalue) {
 					if (parentkey != "subitems") {
 						//add elements to our page
-						alert(parentkey +' - '+ parentvalue);
-						var currentDIV = "<div "+parentkey+"="+'"'+parentvalue+'"'+" >";
-						//check if we add first div element
-						if (isEmpty(lastDIV) ) {
-							var lastDIV = parentvalue;
-							$(".newsitems6").append("<div "+parentkey+"="+'"'+currentDIV+'"');
-							//add second element
+						if (parentkey === "id") {
+							//set first DIV at first step of loop
+							if (currentDIV == null) {
+								currentDIV = "<div " + parentkey + "=" + '"' + parentvalue + '"' + " class=" + '"listofnews"' + " style=" + '"display: block;"' + ">";
+							}
+							//concatenate variables as this DIV is not the first
+							else {
+								currentDIV += "<div " + parentkey + "=" + '"' + parentvalue + '"' + " class=" + '"listofnews"' + " style=" + '"display: block;"' + ">";
+							}
 						}
-						else {
-							alert(lastDIV);
-							$("."+lastDIV).append("<div "+parentkey+"="+'"'+currentDIV+'"');
-							//add second element
-						};
-
-					};
+						else if (parentkey === "title") {
+							currentH2 = "<h2><a href=" + '"#"' + ">" + parentvalue + "</a></h2>";
+							//concatenate variables to one variable
+							currentDIV += currentH2;
+						}
+					}
 					//check if the element is the array
 					if ($.isArray(parentvalue)) {
-						$.each(parentvalue,function(childkey,childvalue) {
-							$.each(childvalue,function(subchildkey,subchildvalue) {
-								if (subchildkey == "description") {
-									alert(subchildkey + ' - ' + subchildvalue);
+						$.each(parentvalue, function (childkey, childvalue) {
+							$.each(childvalue, function (subchildkey, subchildvalue) {
+								if (subchildkey === "title") {
+									currentP = "<h2><a href=" + '"#"' + ">" + subchildvalue + "</a></h2>";
+									currentDIV += currentP;
+								}
+								else if (subchildkey === "description") {
+									currentDIV += "<p>" + subchildvalue + "</p>";
 								}
 							});
 						});
 					}
 				});
-
-
-				/*$.each(value.subitems,function(indexx,value) {
-					$("div").append(indexx + '=' + value);
-				});*/
-						/*$.each(this, function (name, value) {
-						$("div").append(name + '=' + value);
-				});*/
-					//$("div").append(Listobj);
+				currentDIV += "</div>";
 			});
-			//
-		});
-	});
+			//append new DIVs after DIV with id "#newsitem6"
+			$("#newsitem6").append(currentDIV);
+		})
+		//return currentDIV
+	)
 });
 
+//make function global
+//	window.parseJSON=parseJSON
+//})(jQuery);
 
-//show only title
-/*if(name==="title") {
- $("div").append(name + '=' + value);
- }
- else {
- $("div").append(0);
- }*/
-//console.log(name + '=' + value);
-
-//$(function() {
-//	$( "#newsitem7" ).jquery.parseJSON('/mocks/navigation.json');
-//alert( obj.name === "John" );
-//});
-//var obj = jQuery.parseJSON( '{ "name": "John" }' );
-//	alert( obj.name === "John" );
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
-/*$(function () {
-	$('#popup').on('click', function (e) {
-		e.preventDefault();
-		var page =	e.target
-		var $link = $(this)
-	//var page = "login-register-overlay.html";
-		setInterval();
-
-	var $dialog = $('<div></div>')
-		//.html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
-		//.html('<p></p>' )
-		//.load($link.attr('href') + '#login')
-		.load($link.attr('href') + '#login')
-		.dialog({
-			autoOpen: false,
-			modal: true,
-			height: 625,
-			width: 500,
-			title: "Some title"
-		});
-
-	$dialog.dialog('open');
-	});
-});*/
-
-//setInterval(function () {
-//	$("#popup").load("login-register-overlay.html #login");
-//}, 5000);
-
-/*var $modalDialog = $('<div/>', {
-	'class': 'exampleModal',
-	'id': 'exampleModal1'
-})
-	.appendTo('body')
-	.dialog({
-		resizable: false,
-		autoOpen: false,
-		height: 300,
-		width: 350,
-		show: 'fold',
-		buttons: {
-			"Close": function () {
-				$modalDialog.dialog("close");
-			}
-		},
-		modal: true
-	});
-
-$(function () {
-	$('a.popup').on('click', function (e) {
-		e.preventDefault();
-		// TODO: Undo comments, below
-		var url = $('a.popup:first').attr('href');
-		$modalDialog.load(url);
-		$modalDialog.dialog("open");
-	});
-});*/
-//End of almost work
-
-/*$(function(){
-//modal window start
-	$(".popup").unbind('click');
-	$(".popup").bind('click',function(){
-		showDialog();
-		var titletext=$(this).attr("title");
-		var openpage=$(this).attr("href");
-		$("#dialoggg").dialog( "option", "title", titletext );
-		$("#dialoggg").dialog( "option", "resizable", false );
-		$("#dialoggg").dialog( "option", "buttons", {
-			"Close": function() {
-				$(this).dialog("close");
-				$(this).dialog("destroy");
-			}
-		});
-		$("#dialoggg").load(openpage);
-		return false;
-	});
-
-//modal window end
-
-//Modal Window Initiation start
-
-	function showDialog() {
-		$("#dialoggg").dialog({
-			height: 400,
-			width: 500,
-			modal: true
-		});
-	}*/
-
-/*$(document).ready(function() {
-	$("#popup")
-		.click(function(e) {
-		e.preventDefault();
-			var $this = $(this);
-			var horizontalPadding = 30;
-			var verticalPadding = 30;
-			var iframe_popup = $('<iframe id="externalSite" class="externalSite" frameborder="0" allowtransparency="true" src="' + this.href + '" />');
-			loader(e);
-	});
-});
-function loader(e){
-	var theLink = e.target;
-	var $dialog = $('<div></div>')
-
-	.each(function() {
-			var $link = $(this);
-			var $dialog = $('<div></div>')
-			//var $dialog = $('<div>'+data+'</div>')
-
-				.dialog({
-					autoOpen: false,
-					title: $link.attr('title'),
-					width: 500,
-					height: 300
-				});
-				.load($link.attr('href'))
-
-			$link.click(function() {
-				$dialog.dialog('open');
-
-				return false;
-			});
-		});
-	//
-	alert("You clicked: " + theLink);
-	theLink.dialog('open');
-
-	return false;
-}*/
-
-
-
-	//$('#popup').each(function() {
-
-		/*var $link = $(this);
-		var $dialog = $('<div>'+data+'</div>')
-			.load($link.attr('href') + '#login')
-			.dialog({
-				autoOpen: false,
-				title: $link.attr('title'),
-				width: 500,
-				height: 300
-			});
-
-		$link.click(function() {
-			$dialog.dialog('open');
-
-			return false;
-		});
-	});
-});*/
-//$(document).ready(function() {
-/*$("#popup").click(function(e) {
-	e.preventDefault();
-	$('#popup').each(function() {
-		var $link = $(this);
-		var $dialog = $("<div id='test1'>" + data + "</div>")
-			.load($link.attr('href') + ' #login')
-			.dialog({
-				autoOpen: false,
-				title: $link.attr('title'),
-				width: 500,
-				height: 300
-			});
-
-		$link.click(function() {
-			$dialog.dialog('open');
-
-			return false;
-		});
-	});
-});*/
-
-
-
-	//$("#somediv").dialog({modal: true});
-
-//---------------------------------------------
-/*$(document).ready(function() {
-	$('#popup').each(function() {
-		var $link = $(this);
-		var $dialog = $('<div id="hlogin"></div>')
-			$.ajax({
-				url:href,
-				type:'GET',
-				dataType:'html',
-				success:function(data){
-					$('#hlogin').html(
-						$(data).find('#login').html() );
-					//$('#popup', data).contents()
-					);
-				}
-			});
-		$.ajax({
-			url: href,
-			type: "get",
-			success: function(result) {
-				html = jQuery(result);
-				alert(html.find("div#login").html());
-				//alert(html.find("div#vTop"));
-			},
-		});
-			.load($link.attr('href') + ' #login')
-			.dialog({
-				autoOpen: false,
-				title: $link.attr('title'),
-				width: 500,
-				height: 300
-			});
-	});
-});*/
-
-
-/*$(document).ready(function() {
-	//$('#popup').each(function() {
-	$('#popup').click(function(e) {
-		e.preventDefault();
-		var $link = $(this);
-		var $dialog;
-		if ($dialog) {
-			$dialog.show();
-			return false;
-		}
-
-		$dialog	= $('<div id="test">   </div>')
-			.load($link.attr('href'))
-				//.load("login-register-overlay.html div")
-
-			.dialog({
-				autoOpen: false,
-				title: $link.attr('title'),
-				width: 500,
-				height: 300,
-				modal: true
-			});
-
-		$link.click(function() {
-			$dialog.dialog('open');
-
-			return false;
-		});
-
-	});
-});*/
-
-
-/*$.ajax({
- url: "login-register-overlay.html", // отткель
- dataType: "html",         // формат
- success: toHtmlContainer  // callback
- });*/
-
-//$('article').load('index.html header')
-//--AJAX---
-/*$.ajax({
-	url: "ajax/example.html", // отткель
-	dataType: "html",         // формат
-	success: toHtmlContainer  // callback
-});*/
+//===End of parseJSON() Function====================================================================
 //---------------------------------------------------------------------------------------------------------------
 $(function() {
 	$( "#dialog" ).dialog();
@@ -940,13 +638,6 @@ $(function() {
 	});
 });
 //---------------------------------------------------------------------------------------------------------------
-//testing read of JQuery
-//$(function() {
-//	$( "#newsitem7" ).jquery.parseJSON('/mocks/navigation.json');
-	//alert( obj.name === "John" );
-//});
-//var obj = jQuery.parseJSON( '{ "name": "John" }' );
-//	alert( obj.name === "John" );
 //---------------------------------------------------------------------------------------------------------------
 //function login or register
 //---------------------------------------------------------------------------------------------------------------
