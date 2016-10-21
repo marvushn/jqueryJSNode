@@ -632,11 +632,55 @@ $(function() {
 //function for navigation bar
 //---------------------------------------------------------------------------------------------------------------
 $(function() {
+	var myact = false;
 	$( "#navaccordion" ).accordion({
 		active: 1,
-		heightStyle: "content"
+		heightStyle: "content",
+
+		/*clearStyle: true,
+		collapsible: true,      // allow to close completely
+		create: function (event, ui) {
+			//get index in cookie on accordion create event
+			if (($.cookie('saved_index') != null) && ($.cookie('saved_index') != 'false')) {
+				myact = parseInt($.cookie('saved_index'));
+			}
+		},
+		change: function (event, ui) {
+			//set cookie for current index on change event
+			myact = ui.options.active;
+			$.cookie('saved_index', null, { expires: 2, path: '/' });   // session cookie
+			$.cookie('saved_index', myact, { expires: 2, path: '/' });
+		},
+		active: ($.cookie('saved_index') == null) ? 0 : ($.cookie('saved_index') == 'false') ? false : parseInt($.cookie('saved_index'))
+		*/
+		activate: function(event, ui) {
+			localStorage.setItem("accIndex", $(this).accordion("option", "active"));
+		},
+		active: parseInt(localStorage.getItem("accIndex"))
 	});
 });
+
+
+/*$(function(){
+ var myact = false;
+ $( "#myaccordion" ).accordion({
+ clearStyle: true,
+ collapsible: true,      // allow to close completely
+ create: function (event, ui) {
+ //get index in cookie on accordion create event
+ if (($.cookie('saved_index') != null) && ($.cookie('saved_index') != 'false')) {
+ myact = parseInt($.cookie('saved_index'));
+ }
+ },
+ change: function (event, ui) {
+ //set cookie for current index on change event
+ myact = ui.options.active;
+ $.cookie('saved_index', null, { expires: 2, path: '/' });   // session cookie
+ $.cookie('saved_index', myact, { expires: 2, path: '/' });
+ },
+ active: ($.cookie('saved_index') == null) ? 0 : ($.cookie('saved_index') == 'false') ? false : parseInt($.cookie('saved_index'))
+ });
+});*/
 //---------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------
 //function login or register

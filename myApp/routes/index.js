@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var foo = require('/nodeJS/jqueryJSNode/myApp/mocks/navigation.json');
+//var re = require('/nodeJS/jqueryJSNode/myApp/mocks/login-register-overlay.html');
+var re= express();
+var path = require("path");
 var fs = require('fs');
 
 ///nodeJS/jqueryJSNode/myApp
@@ -35,6 +38,10 @@ router.get('/lava', function(req, res, next) {
     }
     res.send(json.title);
   });*/
+});
+
+re.get('/loginRegister', function(req, res, next) {
+  res.sendFile(path.join(__dirname+'/mocks/login-register-overlay.html'));
 });
 
 module.exports = router;
