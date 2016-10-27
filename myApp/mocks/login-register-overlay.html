@@ -11,65 +11,35 @@
 <script src="js/FunctionsAndLibraries.js"></script>
 <script src="js/customJSFunctions.js"></script>
 <script>
-	/*$(function() {
-	 $( "#login-box" ).dialog({
-	 resizable: true,
-	 autoOpen: false,
-	 height:140,
-	 modal: true,
-	 buttons: {
-	 "login": function() {
-	 $( this ).dialog( "close" );
-	 },
-	 "register": function() {
-	 $( this ).dialog( "close" );
-	 },
-	 Cancel: function() {
-	 $( this ).dialog( "close" );
-	 }
-	 }
-	 });
-	 });*/
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 		$("#logb").click(function(){
 			$( window ).unload(function() {
 				return "Bye now!";
 			});
-			//$("#greetLink").html("<p>Hello!</p>");
-			//$("#greetLink").replaceWith("<h2>Welcome user!</h2>");
-			//change title
-			//$("#login").replaceWith("<h2>Welcome user!</h2>");
 
-			//$("#greetLink").change(function() {
-			//replaceWith("<h2>Welcome user!</h2>");
-			//$(this).dialog('close');
-			//$(this).window.close();
-			//return false;
 		});
 
 		$("#regb").click(function(){
 			$.get("index.html", function( my_var ) {
 				var title =  $(my_var).filter('greetLink').text();
-				//title contains the title of index2.html
+
 			});
-			//$("#externalSite").remove();
-
-
-			//$("#register").text("dfdfdf");
-
 		});
 
 	});
+	*/
+
+
 	/*function greetFunc() {
 	 document.getElementById("testsss").innerHTML = "Hello !" ;
 	 }*/
-	$('#logb').on('click',function(){
+	/*$('#logb').on('click',function(){
 		if($('#mainLoginHead').css('display')!='none'){
 			$('#secondLoginHead').html('Out').show().siblings('h3').hide();
 		}else if($('#secondLoginHead').css('display')!='none'){
 			$('#mainLoginHead').show().siblings('h3').hide();
 		}
-	});
+	});*/
 </script>
 <div id="login-box">
 		<div id="login">
