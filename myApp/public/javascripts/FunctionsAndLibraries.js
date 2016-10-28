@@ -18,16 +18,26 @@ $(function() {
 		autoFocus: true
 	});
 });
+
+//---------------------------------------------------------------------------------------------------------------
+//load user if logged in
+//---------------------------------------------------------------------------------------------------------------
+$(function() {
+	if (typeof(Storage) !== "undefined") {
+		// Store
+		localStorage.setItem("lastname", guestUser);
+		// Retrieve
+		//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+		//$("#dialogLink").replaceWith(replaceHTML);
+		document.getElementById("dialogLink").innerHTML = replaceHTML;
+	} else {
+		document.getElementById("dialogLink").innerHTML = "Sorry, your browser does not support Web Storage...";
+	}
+});
 //---------------------------------------------------------------------------------------------------------------
 //function to Login/Register Form
 //---------------------------------------------------------------------------------------------------------------
 //Almost work
-$(function(){
-	$('#logb').click(function(){
-		$("#dialogLink").replaceWith("<p id="+'"'+"dialogLink"+'"'+">"+"Welcome, stranger !" +"</p>");
-	});
-});
-
 $(function(){
 	$('#popup').click(function(){
 		//$(this).load('/templates/login/login-register-overlay.html');
@@ -41,6 +51,7 @@ $(function(){
 				height: "auto",
 				width: "auto",//350,
 				modal: true,
+				//id: "idDia",
 				buttons: {
 					Login: function() {
 						$( this ).load('/templates/login/login-register-overlay.html #login');
@@ -66,7 +77,53 @@ $(function(){
 					}
 				}//,
 				//zIndex: 500
-			});
+			},
+				//$(this).(function(){
+					$("#logb").on('click',function(){
+						var originHTML = "<a id="+'"'+"popup"+'"'+" href="+'"'+"#"+'"'+">Logout</a>";
+						var guestUser = $("#flogin").val();
+						var replaceHTML = "<p id="+'"'+"dialogLink"+'"'+">"+"Welcome " +guestUser+" "+originHTML+"!"+"</p>";
+						//use local storage to keep login
+						function store () {
+							var inputUsername= guestUser;//document.getElementById("username");
+							//var inputPassword= document.getElementById("password");
+							localStorage.setItem("username", inputUsername.value);
+							//localStorage.setItem("password", inputPassword.value);
+						});
+
+						function login() {
+							var inputUsername = localStorage.getItem("username");
+							//var inputPassword = localStorage.getItem("password");
+							if (username != "undefined" || username != "null")
+							{
+								//document.getElementByID('welcomeMessage').innerHTML = "Welcome " + username + "!";
+
+							} else
+								document.getElementById('welcomeMessage').innerHTML = "Hello!";
+						}
+
+						if (typeof(Storage) !== "undefined") {
+							// Store
+							localStorage.setItem("lastname", guestUser);
+							// Retrieve
+							//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+							//$("#dialogLink").replaceWith(replaceHTML);
+							document.getElementById("dialogLink").innerHTML = replaceHTML;
+						} else {
+							document.getElementById("dialogLink").innerHTML = "Sorry, your browser does not support Web Storage...";
+						}
+						//$("#dialogLink").replaceWith(replaceHTML);
+						//
+						//alert( "Handler for "+$( "#flogin" ).val()+" called." );
+						$( this ).dialog( "close" );
+				 	})
+					/*
+					 $("#login").on('click','#logb',function(){
+					 alert( "Handler for login.click() called." );
+					 })
+					 */
+				//})
+			);
 	})
 });
 //--------------------------------------------------------------------------

@@ -3,14 +3,9 @@
 <meta http-equiv="Content-Language" content="English" />
 <meta name="Description" content="Internet Jobs" />-->
 
-<link rel="stylesheet" type="text/css" href="images/style.css" />
-<link rel="stylesheet" type="text/css" href="images/StylesForScrolling.css" />
 <!--JavaScript libraries-->
-<link rel="stylesheet" href="jquery-ui.min.css">
-<script src="www/external/jquery/jquery.js"></script>
-<script src="www/js/jquery-ui.min.js"></script>
-<script src="www/js/FunctionsAndLibraries.js"></script>
-<script src="www/js/customJSFunctions.js"></script>
+<script src="public/vendor/jquery.js"></script>
+<script src="public/vendor/jquery-ui.min.js"></script>
 <script>
 	/*$(function() {
 		$( "#login-box" ).dialog({
@@ -31,7 +26,7 @@
 			}
 		});
 	});*/
-	$(document).ready(function(){
+	$(function(){
 		$("#logb").click(function(){
 			$("#greetLink").html("<p>Hello!</p>");
 			//change title
