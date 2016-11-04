@@ -20,112 +20,270 @@ $(function() {
 });
 
 //---------------------------------------------------------------------------------------------------------------
-//load user if logged in
+//validate forms
+/*$(function() {
+	$("#login").validate({
+		rules: {
+			flogin: "required",
+			fpass: "required"
+		}
+	})
+});*/
 //---------------------------------------------------------------------------------------------------------------
-$(function() {
-	if (typeof(Storage) !== "undefined") {
-		// Store
-		localStorage.setItem("lastname", guestUser);
-		// Retrieve
-		//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-		//$("#dialogLink").replaceWith(replaceHTML);
-		document.getElementById("dialogLink").innerHTML = replaceHTML;
-	} else {
-		document.getElementById("dialogLink").innerHTML = "Sorry, your browser does not support Web Storage...";
+
+//---------------------------------------------------------------------------------------------------------------
+//local storage function
+function store (elementName, valueToPut) {
+	//try to find element in storage
+	if (valueToPut != null) {
+		localStorage.setItem(elementName, valueToPut);
 	}
+	//we put null if we want to delete record item
+	else {
+		localStorage.removeItem(elementName);
+	}
+}
+//---------------------------------------------------------------------------------------------------------------
+//check login function
+function login(elementName) {
+	var inputUsername = localStorage.getItem(elementName);
+	//var inputPassword = localStorage.getItem("password");
+	//if (inputUsername != "undefined" || inputUsername != null)
+	if (inputUsername != null || inputUsername != undefined)
+	{
+		writeGreeting(inputUsername);
+		//document.getElementByID('welcomeMessage').innerHTML = "Welcome " + username + "!";
+	}
+	//else
+	//	document.getElementById('welcomeMessage').innerHTML = "Hello!";
+}
+//---------------------------------------------------------------------------------------------------------------
+//write greetings to logged or registered user
+function writeGreeting(inputUser) {
+	var originHTML = "<a id="+'"'+"popupout"+'"'+" href="+'"'+"#"+'"'+">Logout</a>";
+	if (inputUser != undefined || inputUser != null) {
+		var incomeUser = inputUser;
+	} else
+		var incomeUser = $("#flogin").val();
+	var replaceHTML = "<p id="+'"'+"dialogLink"+'"'+">"+"You are logged in as " +incomeUser+" "+originHTML+"!"+"</p>";
+	$("#dialogLink").replaceWith(replaceHTML);
+	//set green text for logged user
+	document.getElementById("dialogLink").style.color = "green";
+	//put login to local storage
+	store("#dialogLink",incomeUser);
+	//document.getElementById("dialogLink").innerHTML = replaceHTML;
+}
+//---------------------------------------------------------------------------------------------------------------
+//function logout
+//---------------------------------------------------------------------------------------------------------------
+ function logout(logoutCommand) {
+	//replace text with default value
+	if (logoutCommand != null) {
+		var originHTML = "<a id=" + '"' + "popup" + '"' + " href=" + '"' + "#" + '"' + ">Register or Login here</a>";
+		$("#dialogLink").replaceWith("<p id=" + '"' + "dialogLink" + '"' + ">" + "Hello, you can" + originHTML + "</p>");
+		document.getElementById("dialogLink").style.color = "black";
+		store("#dialogLink", null);//delete record from local storage
+		logoutCommand = null;
+	}
+}
+//---------------------------------------------------------------------------------------------------------------
+//load logged user
+$(function () {
+	login("#dialogLink");
 });
+//---------------------------------------------------------------------------------------------------------------
+//login or register form
+function loginOrRegister(loginregister,checkingChildElement) {
+	var checkingInputs;
+	if (loginregister == "#login") {
+		checkingInputs = (checkingChildElement == "flogin") ? "login" : "password";
+	}
+	else {
+		checkingInputs = (checkingChildElement == "femail") ? "email" : "login";
+	}
+	return checkingInputs;
+}
+//---------------------------------------------------------------------------------------------------------------
+//error warnings
+function errorWarning(parentElement,childElement) {
+	var errorExists = false;
+
+	if (childElement.localName == "input") {
+		var checkingElement = childElement.id.replace(/\,/g,"");
+		var elementValue = $("#"+checkingElement).val();
+
+		if (elementValue == "" || elementValue == null || elementValue == "undefined") {
+			//errorMessage = (checkingElement == "flogin") ? "login" : "password";
+			errorMessage = loginOrRegister(parentElement,checkingElement);
+			errorMessage = "Field " +  errorMessage + " is empty !!!";
+			$(parentElement).append(" <b id='errorLogin'>"+errorMessage+"</b>");
+			//document.getElementById("errorF").style.backgroundColor = "yellow";
+			//document.getElementById(checkingElement).defaultValue = errorMessage;
+			errorExists = true;
+		}
+
+		else if (validateEmail(elementValue) == false || validatePassword(elementValue) == false) {
+			//errorMessage = (checkingElement == "flogin") ? "login" : "password";
+			errorMessage = loginOrRegister(parentElement,checkingElement);
+			errorMessage = "Field " +  errorMessage + " is incorrect !!!";
+			$(parentElement).append(" <b id='errorRegister'>"+errorMessage+"</b>");
+			errorExists = true;
+		}
+	}
+	return errorExists;
+}
+//---------------------------------------------------------------------------------------------------------------
+//check waht we have
+//---------------------------------------------------------------------------------------------------------------
+//custom validation function
+function validateloginOrRegister(loginRegister,loginRegisterChildren) {
+	var errorExists = false;
+	for (i = 0; i < loginRegisterChildren.length; i++) {
+		//var checkingField;
+		//check login/email
+		//login or register form
+		if (loginRegister == "#login") {
+			errorExists = errorWarning(loginRegister,loginRegisterChildren[i]);
+
+			if (errorExists == true) {
+				break
+			}
+		}
+		else if (loginRegister == "#register") {
+			errorExists = errorWarning(loginRegister,loginRegisterChildren[i]);
+
+			if (errorExists == true) {
+				break
+			}
+		}
+	}
+	return errorExists;
+}
+
+//validate email regex
+function validateEmail(email) {
+	var emailTemplate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return emailTemplate.test(email);
+}
+
+//validate password
+function validatePassword(pass) {
+	var passwordTemplate = /[^a-z0-9]/gi;
+	return passwordTemplate.test(pass);
+}
+//---------------------------------------------------------------------------------------------------------------
+//on click functions for dialof input fields
+function onClickInput (inputElementID,errorInfoElement) {
+	if ( $( errorInfoElement ).length ) {
+		$( errorInfoElement ).remove();
+		document.getElementById(inputElementID).defaultValue = "";
+	}
+	//store("#dialogLink",incomeUser);
+}
 //---------------------------------------------------------------------------------------------------------------
 //function to Login/Register Form
 //---------------------------------------------------------------------------------------------------------------
-//Almost work
+//user login
 $(function(){
-	$('#popup').click(function(){
+	$(document).on("click",'#popup',function(){//using $(document).on as we need to keep active links after changing
+	//$('#popup').on("click",function(){
 		//$(this).load('/templates/login/login-register-overlay.html');
 		//event.preventDefault();
 		var loginRegisterCheck;
-		$(this)
-			.dialog({
-				closeOnEscape: false,
-				title: "Login or Register",
-				//autoOpen: true,
-				height: "auto",
-				width: "auto",//350,
-				modal: true,
-				//id: "idDia",
-				buttons: {
-					Login: function() {
-						$( this ).load('/templates/login/login-register-overlay.html #login');
-					},
-					Register: function() {
-						$( this ).load('/templates/login/login-register-overlay.html #register');
-					},
-					Cancel: function() {
-						//<a id="popup" href="#">Register or Login here</a>
-						var originHTML = "<a id="+'"'+"popup"+'"'+" href="+'"'+"#"+'"'+">Register or Login here</a>";
-						$("#dialogLink").replaceWith("<p id="+'"'+"dialogLink"+'"'+">"+"Hello, you can" + originHTML+"</p>");
-						//$("##popup").replaceWith("<h2>Welcome "+ name.val() +"</h2>");
-						$( this ).dialog( "close" );
+		var LoginLogout = document.getElementById("popup").innerText;
 
-						//check if user has signed in
-						if ( loginRegisterCheck !=$("#greetLink").val() ) {
-							alert("User has logged in!");
-						}
-						else {
-							alert("User has cancaled logging in!")
-						}
-
-					}
-				}//,
-				//zIndex: 500
-			},
-				//$(this).(function(){
-					$("#logb").on('click',function(){
-						var originHTML = "<a id="+'"'+"popup"+'"'+" href="+'"'+"#"+'"'+">Logout</a>";
-						var guestUser = $("#flogin").val();
-						var replaceHTML = "<p id="+'"'+"dialogLink"+'"'+">"+"Welcome " +guestUser+" "+originHTML+"!"+"</p>";
-						//use local storage to keep login
-						function store () {
-							var inputUsername= guestUser;//document.getElementById("username");
-							//var inputPassword= document.getElementById("password");
-							localStorage.setItem("username", inputUsername.value);
-							//localStorage.setItem("password", inputPassword.value);
-						});
-
-						function login() {
-							var inputUsername = localStorage.getItem("username");
-							//var inputPassword = localStorage.getItem("password");
-							if (username != "undefined" || username != "null")
-							{
-								//document.getElementByID('welcomeMessage').innerHTML = "Welcome " + username + "!";
-
-							} else
-								document.getElementById('welcomeMessage').innerHTML = "Hello!";
-						}
-
-						if (typeof(Storage) !== "undefined") {
-							// Store
-							localStorage.setItem("lastname", guestUser);
-							// Retrieve
-							//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-							//$("#dialogLink").replaceWith(replaceHTML);
-							document.getElementById("dialogLink").innerHTML = replaceHTML;
-						} else {
-							document.getElementById("dialogLink").innerHTML = "Sorry, your browser does not support Web Storage...";
-						}
-						//$("#dialogLink").replaceWith(replaceHTML);
-						//
-						//alert( "Handler for "+$( "#flogin" ).val()+" called." );
-						$( this ).dialog( "close" );
-				 	})
-					/*
-					 $("#login").on('click','#logb',function(){
-					 alert( "Handler for login.click() called." );
-					 })
-					 */
-				//})
-			);
+		if (LoginLogout != "Logout") {
+			openDialog();
+		}
 	})
 });
+//user logout
+$(function(){
+	$(document).on("click",'#popupout',function(){//using $(document).on as we need to keep active links after changing
+	//$('#popupout').on("click",function(){
+		//var LoginLogout = document.getElementById("popup").innerText;
+		//check if  element exists
+		if ($('#popupout').length > 0) {
+			var outLogin = document.getElementById("popupout").innerText;
+		}
+
+		if (outLogin == "Logout")
+		{
+			logout("out")
+		}
+	})
+});
+//$(document).ready(function($) {
+$(function($) {
+		window.openDialog = function () {
+			$('#popup')
+			//event.preventDefault()
+				.dialog({
+						closeOnEscape: false,
+						title: "Login or Register",
+						autoOpen: true,
+						height: "auto",
+						width: "auto",//350,
+						modal: true,
+						buttons: {
+							Login: function () {
+								$(this).load('/templates/login/login-register-overlay.html #login');
+							},
+							Register: function () {
+								$(this).load('/templates/login/login-register-overlay.html #register');
+							},
+							Cancel: function () {
+								var originHTML;
+								if ($('#popupout').length > 0) {
+									$(this).dialog("close");
+								}
+								else {
+									originHTML = "<a id=" + '"' + "popup" + '"' + " href=" + '"' + "#" + '"' + ">Register or Login here</a>";
+									$("#dialogLink").replaceWith("<p id=" + '"' + "dialogLink" + '"' + ">" + "Hello, you can" + originHTML + "</p>");
+									$(this).dialog("close");
+								}
+								//check if user has signed in
+								/*if (loginRegisterCheck != $("#greetLink").val()) {
+									alert("User has logged in!");
+								}
+								else {
+									alert("User has cancaled logging in!")
+								}*/
+
+							}
+						}
+						//zIndex: 500
+					},
+					//confirm login
+					$("#logb").on('click', function () {
+						var checkLogining = validateloginOrRegister("#login",document.getElementById("login").children);
+						if (checkLogining == false) {
+							var guestUser = $("#flogin").val();
+							writeGreeting(guestUser);
+						}
+						else {
+							alert("please, correct inputed information !")
+						}
+					}),
+					$("#flogin").on('click', function () {
+						//
+						onClickInput("flogin","#errorRegister");
+					}),
+					$("#fpass").on('click', function () {
+						//
+						onClickInput("fpass","#errorRegister");
+					}),
+					$("#femail").on('click', function () {
+						//
+						onClickInput("femail","#errorRegister");
+					}),
+					$("#floginnew").on('click', function () {
+						//
+						onClickInput("floginnew","#errorRegister");
+					})
+				);
+		}
+	});
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //==========Function parseJSON() begins...==========================================================================
