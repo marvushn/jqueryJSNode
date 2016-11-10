@@ -15,8 +15,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(src='/vendor/jquery-ui.min.js')
     script(src='/vendor/custom.jquery.slider.pagination.js')
     script(src='/vendor/jquery.validate.js')
-    script(src='/javascripts/FunctionsAndLibraries.js')
-    script(src="/javascripts/script.js")
+    script(src='/javascripts/FunctionsAndLibraries.js' defer)
+    script(src='/javascripts/loadJSON.js' defer)
+   // script(src="/javascripts/script.js" defer)
     //title Internet News
     title= title
     //script.
@@ -75,10 +76,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         #left
           table
             tbody
-              // <div id="newsbox">
               h1 New posts
               // we need to implement some logic structure for custom pagination
-              tr
+              tr#tr1
                 #newsitem.listofnews
                   h2
                     a(href='#') Lorem Ipsum
@@ -105,7 +105,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                       img(src='images/timeicon.gif', alt='')
                       |  10th Jan, 2006
               | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              tr
+              tr#tr2
                 #newsitem2.listofnews
                   h2
                     a(href='#') Lorem Ipsum2
@@ -125,7 +125,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     img(src='images/timeicon.gif', alt='')
                     |  29th Dec, 2005
               | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              tr
+              tr#tr3
                 #newsitem3.listofnews
                   h2
                     a(href='#') Lorem Ipsum3
@@ -145,7 +145,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     img(src='images/timeicon.gif', alt='')
                     |  24th Dec, 2005
               // f
-              tr
+              tr#tr4
                 #newsite4.listofnews
                   h2
                     a(href='#') Lorem Ipsum4
@@ -172,7 +172,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                       img(src='images/timeicon.gif', alt='')
                       |  10th Jan, 2006
               | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              tr
+              tr#tr5
                 #newsitem5.listofnews
                   h2
                     a(href='#') Lorem Ipsum5
@@ -192,7 +192,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                     img(src='images/timeicon.gif', alt='')
                     |  29th Dec, 2005
               | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              tr
+              tr#tr6
                 #newsitem6.listofnews
                   h2
                     a(href='#') Lorem Ipsum6
@@ -230,6 +230,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             <button>Next</button>
             </div>
             </div>
+
           .pagination-page
 
           span.pagination-info
@@ -328,3 +329,4 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     p
       span.ui-icon.ui-icon-alert(style='float:left; margin:0 7px 20px 0;')
       | Please, enter the system
+

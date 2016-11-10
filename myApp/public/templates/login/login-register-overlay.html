@@ -7,54 +7,6 @@
 <script src="public/vendor/jquery.js"></script>
 <script src="public/vendor/jquery-ui.min.js"></script>
 <script>
-	/*$(function() {
-		$( "#login-box" ).dialog({
-			resizable: true,
-			autoOpen: false,
-			height:140,
-			modal: true,
-			buttons: {
-				"login": function() {
-					$( this ).dialog( "close" );
-				},
-				"register": function() {
-					$( this ).dialog( "close" );
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-	});*/
-	$(function(){
-		$("#logb").click(function(){
-			$("#greetLink").html("<p>Hello!</p>");
-			//change title
-			$("#login").replaceWith("<h2>Welcome user!</h2>");
-		});
-		$("#regb").click(function(){
-			$.get("index.html", function( my_var ) {
-				var title =  $(my_var).filter('greetLink').text();
-				//title contains the title of index2.html
-			});
-			//$("#externalSite").remove();
-
-
-			//$("#register").text("dfdfdf");
-
-		});
-
-	});
-	/*function greetFunc() {
-		document.getElementById("testsss").innerHTML = "Hello !" ;
-	}*/
-	$('#logb').on('click',function(){
-		if($('#mainLoginHead').css('display')!='none'){
-			$('#secondLoginHead').html('Out').show().siblings('h3').hide();
-		}else if($('#secondLoginHead').css('display')!='none'){
-			$('#mainLoginHead').show().siblings('h3').hide();
-		}
-	});
 </script>
 <div id="login-box">
 		<div id="login">
@@ -64,17 +16,17 @@
 		    <input type="text" name="flogin," id="flogin" value="" maxlength="30" />
 		    <br />
 		    <label for="fpass">Password</label>
-		    <input type="password," id="fpass," name="fpass" value="" />
+		    <input type="password," id="fpass" name="fpass" value="" />
 		    <label for="logbutton"> </label>
 		    <button id="logb" name="logbutton">Login</button>
 		</div>
 		<div id="register">
 		    <h3>Register now</h3>
 		    <label for="femail">Email</label>
-		    <input type="text," value="" id=femail, name="femail" />
+		    <input type="text" value="" id="femail" name="femail" />
 		    <br />
 		    <label for="floginnew">Login</label>
-		    <input type="text," id="floginnew," name="floginnew," value="" />
+		    <input type="text" id="floginnew" name="floginnew," value="" />
 		    <label for="regbutton"> </label>
 		    <button id="regb" name="regbutton">Register</button>
 		</div>
