@@ -247,6 +247,8 @@ $(function(){
 	})
 });
 //$(document).ready(function($) {
+
+//function which is called when we open dialog
 $(function($) {
 		window.openDialog = function () {
 			$('#popup')

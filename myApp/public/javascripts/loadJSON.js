@@ -83,9 +83,9 @@ $(function() {
 
 });
 
-//$(function($) {
-  //  window.launchPagination = function () {
-    function launchPagination() {
+$(function($) {
+    window.launchPagination = function () {
+    //function launchPagination() {
         //$(function(launchPagination) {
 
         var items = $("div.listofnews");
@@ -121,7 +121,7 @@ $(function() {
 
     }
 
-//});
+});
 
 //make function global
 //	window.parseJSON=parseJSON
